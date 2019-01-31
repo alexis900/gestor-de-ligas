@@ -66,6 +66,9 @@ if ($par > 0) {
         echo "<tr>";
             echo "<td>" . $partido[$i]['e1'] . "</td>";
             if (isset($_GET['modifica']) == "yes") {
+                if($partiod[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null){
+                    header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
+                }
                 echo "<form action=\"update_ronda.php\" method=\"get\">
                     <td><input type=\"number\" name=\"partido[$i][e1]\" id=\"e1\" min=\"0\" max=\"100\"value=\"0\"></td>
                     <td><input type=\"number\" name=\"partido[$i][e2]\" id=\"e2\" min=\"0\" max=\"100\" value=\"0\"></td>
