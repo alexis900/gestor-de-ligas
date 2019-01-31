@@ -56,52 +56,75 @@ if ($par > 0) {
                     $mostrarFecha = true;
                 }
             }
-            if($mostrarFecha || isset($_GET['modifica'])){
+            if($mostrarFecha){
                 echo "<th>Fecha del partido</th>";
             }
-            ?> 
+            ?>
         </tr>
         <?php
-        for($i = 0; $i < $par;$i++){
+
+        if (!isset($_GET['partido'])) {
+            for ($i=0; $i < $par; $i++) { 
+                echo "<tr>";
+                    echo "<td>" . $partido[$i]['e1'] . "</td>";
+                    echo "<td>" . $partido[$i]['p1'] . "</td>";
+                    echo "<td>" . $partido[$i]['p2'] . "</td>";
+                    echo "<td>" . $partido[$i]['e2'] . "</td>";
+                    echo "<td>" . $partido[$i]['fecha'] . "</td>";
+                    if ($partido[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null) {
+                        echo "<td><a href=\"ver_ronda.php?liga=$ligaId&ronda=$rondaId&partido=$i\">Modifica</a></td>";
+                    }
+                echo "</tr>";
+            }
+    } else {
+        ?>
+        <form action="update_ronda.php" method="get">
+        <?php
+        $partidoId = $_GET['partido'];
+        $partId = $partido[$partidoId]['id'];
+
+        $p1 = $partido[$partidoId]['p1'] == null ? null : $partido[$partidoId]['p1'] ;
+        $p2 = $partido[$partidoId]['p2'] == null ? null : $partido[$partidoId]['p2'] ;
+        $f = $partido[$partidoId]['fecha'] == null ? null : $partido[$partidoId]['fecha'] ;
         echo "<tr>";
-            echo "<td>" . $partido[$i]['e1'] . "</td>";
-            if (isset($_GET['modifica']) == "yes") {
-                if($partiod[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null){
-                    header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
-                }
-                echo "<form action=\"update_ronda.php\" method=\"get\">
-                    <td><input type=\"number\" name=\"partido[$i][e1]\" id=\"e1\" min=\"0\" max=\"100\"value=\"0\"></td>
-                    <td><input type=\"number\" name=\"partido[$i][e2]\" id=\"e2\" min=\"0\" max=\"100\" value=\"0\"></td>
-                    <td>" . $partido[$i]['e2'] . "</td>" .
-                    "<td>
-                        <input type=\"date\" name=\"partido[$i][date]\" id=\"date\" value=\"". date('Y-m-d') . "\">
-                        <input type=\"time\" name=\"partido[$i][time]\" id=\"time\" value=\"". date("H:i") ."\"\>
-                    </td>";
-                
+            echo "<td>" . $partido[$partidoId]['e1'] . "</td>";
+            if ($p1 > 0) {
+                echo "<td>" . $p2 . "</td>";
+                echo "<input type=\"hidden\" name=\"partido[$partId][p1]\" id=\"p1h\ value=\"$p1\"/>";
             } else {
-                echo "<td>" . $partido[$i]['p1'] . "</td>";
-                echo "<td>" . $partido[$i]['p2'] . "</td>";
-                echo "<td>" . $partido[$i]['e2'] . "</td>";
+                echo "<td><input type=\"number\" name=\"partido[$partId][p1]\" id=\"p1\" value=\"0\" min=\"0\" max=\"100\"></td>";
+            }
+
+            if ($p2 > 0) {
+                echo "<td>" . $p1 . "</td>";
+                echo "<input type=\"hidden\" name=\"partido[$partId][p2]\" id=\"p1h\ value=\"$p2\"/>";
+            } else {
+                echo "<td><input type=\"number\" name=\"partido[$partId][p2]\" id=\"p2\" value=\"0\" min=\"0\" max=\"100\"></td>";
+            }
+            echo "<td>" . $partido[$partidoId]['e2'] . "</td>";
+
+            if ($f == null) {
+                echo "<td><input type=\"date\" name=\"partido[$partId][date]\" id=\"date\" value=\"". date('Y-m-d') . "\"></td>";
+                echo "<td><input type=\"time\" name=\"partido[$partId][time]\" id=\"time\" value=\"". date("H:i") ."\"></td>";
+            } else {
+                echo "<td>$f</td>";
             }
             
-            if($partido[$i]['fecha'] != null){
-                echo "<td>" . $partido[$i]['fecha'] . "</td>";
-            }
         echo "</tr>";
+
+        if($p1 != null && $p2 != null && $fecha == null){
+            header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
+        } else {
+            echo "Envia";
         }
-        ?>
-    </table>
-    <?php
-    } else {
-        echo "<p>No existe la ronda</p>";
+        
+            ?>
+            
+        </form>
+        </table>
+        <?php
     }
-    if(isset($_GET['modifica'])){
-        echo "<input type=\"hidden\" name=\"liga\" value=\"".$partido[$par]['id']."\">";
-        echo "<input type=\"submit\" value=\"Envia\">";
-        echo "</form>";
-    } else {
-        echo "<a href=\"ver_ronda.php?liga=$ligaId&ronda=$rondaId&modifica=yes\">Modifica</a>";
-    }
+}
     ?>
     
     <a href="ver_liga.php?liga=<?=$ligaId?>">Atrás</a>

@@ -4,7 +4,7 @@ require_once("db.php");
 head("Inicio");
 
 $sql = "SELECT * FROM liga";
-$result = mysqli_query($con, $sql);
+$rst = mysqli_query($con, $sql);
 ?>
         <table>
             <tr>
@@ -13,7 +13,7 @@ $result = mysqli_query($con, $sql);
             </tr>
         
         <?php 
-        while ($row = mysqli_fetch_row($result)) {
+        while ($row = mysqli_fetch_row($rst)) {
         echo "<tr>";
             echo "<td><a href=\"ver_liga.php?liga=$row[0]\">"  . $row[1] . "</a></td>";
             echo "<td>" . $row[2] . "</td>";

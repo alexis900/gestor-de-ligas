@@ -1,9 +1,4 @@
 <?php
-require_once("./db.php");
-function DB ($host, $user, $passwd, $db) {
-    return mysqli_connect($host, $user, $passwd, $db);
-}
-
 function head($title){
 echo "<!DOCTYPE html>
 <html lang=\"es\">
