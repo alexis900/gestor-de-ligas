@@ -121,9 +121,11 @@ if ($par > 0) {
                 echo "<input type=\"hidden\" name=\"partido[$partId][time]\" value=\"$hora\">";
             }
 
-            if($p1 != null && $p2 != null && $fecha == null){
+            if($p1 != null && $p2 != null && $fecha != null){
             header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
         } else {
+            echo "<input type=\"hidden\" name=\"partido[$partId][ronda]\" value=\"$rondaId\">";
+            echo "<input type=\"hidden\" name=\"partido[$partId][liga]\" value=\"$ligaId\">";
             echo "<td><input type=\"submit\" value=\"Envia\"></td>";
         }
             
