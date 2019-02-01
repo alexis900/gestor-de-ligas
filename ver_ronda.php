@@ -109,15 +109,14 @@ if ($par > 0) {
             } else {
                 echo "<td>$f</td>";
             }
-            
-        echo "</tr>";
 
-        if($p1 != null && $p2 != null && $fecha == null){
+            if($p1 != null && $p2 != null && $fecha == null){
             header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
         } else {
-            echo "Envia";
+            echo "<td><input type=\"submit\" value=\"Envia\"></td>";
         }
-        
+            
+        echo "</tr>";
             ?>
             
         </form>
