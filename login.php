@@ -18,8 +18,7 @@ if (isset($_POST['username']) && isset($_POST['passwd'])) {
     if ($row[0] == 1) {
         $_SESSION['username'] = $username;
     }
-
-    print_r($_SESSION);
+    header("Location: index.php");
 }
 
 ?>

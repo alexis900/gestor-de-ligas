@@ -1,20 +1,38 @@
 <?php
 function head($title){
-echo "<!DOCTYPE html>
-<html lang=\"es\">
+?>
+<!DOCTYPE html>
+<html lang="es">
 <head>
-    <meta charset=\"UTF-8\">
-    <link rel=\"stylesheet\" href=\"css/main.css\">
-    <title>$title</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="css/main.css">
+    <title><?=$title?></title>
 </head>
 <body>
     <header>
         <nav>
             <h1>Gestor de ligas</h1>
+                <ul>
+<?php
+            if (isset($_SESSION['username'])) {
+                $username = $_SESSION['username'];
+                echo "<li>¡Hola, $username!</li>";
+                ?>
+                <li><a href="logout.php">Cerrar la sesión</a></li>
+                <?php
+            } else {
+?>
+                <li><a href="login.php">Iniciar sesión</a></li>
+<?php
+            }
+?>
+            </ul>
         </nav>
     </header>
-    <main>";
+    <main>
+<?php
 }
+
 
 function enfrentamientos($nume) {
     $pares = (($nume % 2) == 0);
