@@ -65,7 +65,7 @@ if ($par > 0) {
         </tr>
         <?php
         
-       //S
+       //Si no tiene $_GET['partido'], se mostrarán todos los partidos. Si no, mostrará solo el partido seleccionado
         if (!isset($_GET['partido'])) {
             for ($i=0; $i < $par; $i++) { 
                 echo "<tr>";
@@ -74,21 +74,28 @@ if ($par > 0) {
                     echo "<td>" . $partido[$i]['p2'] . "</td>";
                     echo "<td>" . $partido[$i]['e2'] . "</td>";
                     echo "<td>" . $partido[$i]['fecha'] . "</td>";
-                    if ($partido[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null) {
-                        echo "<td><a href=\"ver_ronda.php?liga=$ligaId&ronda=$rondaId&partido=$i\">Modifica</a></td>";
+                    if (isset($_SESSION['username'])) {
+                        if ($partido[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null) {
+                            echo "<td><a href=\"ver_ronda.php?liga=$ligaId&ronda=$rondaId&partido=$i\">Modifica</a></td>";
+                        }
                     }
                 echo "</tr>";
             }
     } else {
+        if ($_SESSION['username']) {
+            # code...
+        
         ?>
         <form action="update_ronda.php" method="get">
         <?php
         $partidoId = $_GET['partido'];
         $partId = $partido[$partidoId]['id'];
 
+        //Si no se selecciona ningún puntuaje, se neviará null
         $p1 = $partido[$partidoId]['p1'] == null ? null : $partido[$partidoId]['p1'] ;
         $p2 = $partido[$partidoId]['p2'] == null ? null : $partido[$partidoId]['p2'] ;
 
+        //Divide los apartados de la fecha
         $fecha_completa = $partido[$partidoId]['fecha'] == null ? null : $partido[$partidoId]['fecha'] ;
         if ($fecha_completa != null) {
             $fecha = date_format(date_create($fecha_completa), 'Y-m-d');
@@ -133,12 +140,14 @@ if ($par > 0) {
             ?>
             
         </form>
-        </table>
+        
+        
         <?php
+        }
     }
 }
     ?>
-    
+    </table>
     <a href="ver_liga.php?liga=<?=$ligaId?>">Atrás</a>
  </main>   
 </body>

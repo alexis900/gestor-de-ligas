@@ -1,6 +1,7 @@
 <?php
 require_once("includes/functions.php");
 require_once("db.php");
+session_start();
 if (!isset($_GET['liga']) || empty($_GET['liga'])) {
     header("Location: index.php");
 }

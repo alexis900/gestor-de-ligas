@@ -1,9 +1,29 @@
 <?php
 require_once('includes/functions.php');
 require_once('db.php');
-head("Log In")
+session_start();
+
+if (isset($_SESSION['username'])) {
+    header("Location: index.php");
+}
+
+head("Log In");
+if (isset($_POST['username']) && isset($_POST['passwd'])) {
+    $username = $_POST['username'];
+    $passwd = md5($_POST['passwd']);
+    $sql = "SELECT count(*) FROM administradores where login = '$username' and password = '$passwd'";
+    $rst = mysqli_query($con, $sql);
+    $row = mysqli_fetch_row($rst);
+
+    if ($row[0] == 1) {
+        $_SESSION['username'] = $username;
+    }
+
+    print_r($_SESSION);
+}
+
 ?>
-<form action="" method="post">
+<form action="login.php" method="post">
     <input type="text" name="username" id="username">
     <input type="password" name="passwd" id="passwd">
     <input type="submit" value="Inicia sesión">
