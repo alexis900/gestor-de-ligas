@@ -5,13 +5,14 @@ function head($title){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="css/main.css">
+    <!--<link rel="stylesheet" href="css/main.css">-->
     <title><?=$title?></title>
 </head>
 <body>
     <header>
         <nav>
-            <h1>Gestor de ligas</h1>
+            <h1><a href="index.php">Gestor de ligas</a></h1>
+            <div id="user">
                 <ul>
 <?php
             if (isset($_SESSION['username'])) {
@@ -27,6 +28,7 @@ function head($title){
             }
 ?>
             </ul>
+        </div>
         </nav>
     </header>
     <main>

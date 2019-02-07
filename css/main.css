@@ -1,0 +1,53 @@
+ @import url('https://fonts.googleapis.com/css?family=Open+Sans');
+ * {
+    font-family: 'Open Sans', sans-serif;
+ }
+
+/* Comienzan los estilos de la barra de navegación */
+
+ nav {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    background-color: red;
+ }
+
+ nav #user {
+     position: absolute;
+     top: 0;
+     right: 0;
+     height: 100%;
+     background-color: yellow;
+ }
+
+ nav #user li {
+     display: inline-block;
+ }
+
+ nav #user li a {
+     margin: 0 5px;
+     padding: 100% 10px 100% 10px;
+     
+ }
+
+  nav #user li a:hover {
+    background-color: aliceblue;
+  }
+
+ /* Acaban los estilos de la barra de navegación*/
+
+ main {
+    position: absolute;
+    left: 0;
+    right: 0; 
+    top: 73px;
+    bottom: 0;
+    background-color: green;
+ }
+
+ /* Login */
+
+ #login {
+    position:absolute;
+ }

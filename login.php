@@ -23,8 +23,8 @@ if (isset($_POST['username']) && isset($_POST['passwd'])) {
 
 ?>
 <form action="login.php" method="post">
-    <input type="text" name="username" id="username">
-    <input type="password" name="passwd" id="passwd">
+    <input type="text" name="username" id="username"><br>
+    <input type="password" name="passwd" id="passwd"><br>
     <input type="submit" value="Inicia sesión">
 </form>
 </main>

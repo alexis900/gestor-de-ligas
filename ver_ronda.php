@@ -1,6 +1,7 @@
 <?php
 require_once("includes/functions.php");
 require_once("db.php");
+session_start();
 if (!isset($_GET['liga']) || empty($_GET['liga']) || !isset($_GET['ronda']) || empty($_GET['ronda'])) {
     header("Location: index.php");
 }
@@ -12,6 +13,15 @@ $sql = "select nombre from liga where id=$ligaId";
 $rst = mysqli_query($con,$sql);
 $row = mysqli_fetch_row($rst);
 $nombreLiga = $row[0];
+
+$sql = "select distinct count(*) from partido where liga_id = $ligaId";
+$rst = mysqli_query($con,$sql);
+$row = mysqli_fetch_row($rst);
+$numRondas = $row[0];
+
+if($rondaId <= 0 || $rondaId > $numRondas){
+    header("Location: index.php");
+}
 
 // Proporciona el título de la página en el formato
 $title = $nombreLiga . " - Ronda $rondaId";
@@ -64,10 +74,10 @@ if ($par > 0) {
             ?>
         </tr>
         <?php
-        
+        $numPart = 0;
        //Si no tiene $_GET['partido'], se mostrarán todos los partidos. Si no, mostrará solo el partido seleccionado
         if (!isset($_GET['partido'])) {
-            for ($i=0; $i < $par; $i++) { 
+            for ($i=0; $i < $par; $i++) {
                 echo "<tr>";
                     echo "<td>" . $partido[$i]['e1'] . "</td>";
                     echo "<td>" . $partido[$i]['p1'] . "</td>";
@@ -80,11 +90,14 @@ if ($par > 0) {
                         }
                     }
                 echo "</tr>";
+                $numPart++;
             }
     } else {
-        if ($_SESSION['username']) {
-            # code...
         
+        if ($_SESSION['username']) {
+            if ($_GET['partido'] == NULL || $_GET['partido'] > $numPart) {
+                header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
+            }
         ?>
         <form action="update_ronda.php" method="get">
         <?php
