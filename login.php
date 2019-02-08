@@ -8,6 +8,11 @@ if (isset($_SESSION['username'])) {
 }
 
 head("Log In");
+
+if (isset($_GET['error']) == 1) {
+    echo "<p class = \"error\">Usuario o contraseña incorrectos<p>";
+}
+
 if (isset($_POST['username']) && isset($_POST['passwd'])) {
     $username = $_POST['username'];
     $passwd = md5($_POST['passwd']);
@@ -18,7 +23,7 @@ if (isset($_POST['username']) && isset($_POST['passwd'])) {
     if ($row[0] == 1) {
         $_SESSION['username'] = $username;
     }
-    header("Location: index.php");
+    header("Location: login.php?error=1");
 }
 
 ?>

@@ -2,9 +2,9 @@
 require_once("includes/functions.php");
 require_once("db.php");
 session_start();
-
+head("Elimina");
 if ($_SESSION['username']) {
-    head("Elimina");
+    
 
     if (isset($_GET['liga'])) {
         $ligaId = $_GET['liga'];
@@ -28,6 +28,9 @@ if ($_SESSION['username']) {
         <label for="si">¿Está seguro?</label><input type="checkbox" name="si" id="si">
         <input type="submit" value="Envia">
     </form>
+<main>
+    <body>
+    <html>
 
 <?php
 } else {
