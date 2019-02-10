@@ -83,7 +83,7 @@ if ($par > 0) {
                     echo "<td>" . $partido[$i]['p1'] . "</td>";
                     echo "<td>" . $partido[$i]['p2'] . "</td>";
                     echo "<td>" . $partido[$i]['e2'] . "</td>";
-                    echo "<td>" . $partido[$i]['fecha'] . "</td>";
+                    echo "<td>" . transforma_datetime($partido[$i]['fecha']) . "</td>";
                     if (isset($_SESSION['username'])) {
                         if ($partido[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null) {
                             echo "<td><a href=\"ver_ronda.php?liga=$ligaId&ronda=$rondaId&partido=$i\">Modifica</a></td>";
@@ -94,7 +94,7 @@ if ($par > 0) {
             }
     } else {
         
-        if ($_SESSION['username']) {
+        if (isset($_SESSION['username'])) {
             if ($_GET['partido'] == NULL || $_GET['partido'] > $numPart) {
                 header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
             }

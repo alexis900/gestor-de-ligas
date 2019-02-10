@@ -20,16 +20,24 @@ $rst = mysqli_query($con, $sql);
         $ligaId = $row[0];
         $ligaNombre = $row[1];
         $ligaFecha = $row[2];
-
-        echo "<tr>";
-            echo "<td><a href=\"ver_liga.php?liga=$ligaId\">$ligaNombre</a></td>";
-            echo "<td>$ligaFecha</td>";
-            if (isset($_SESSION['username'])) {
-                echo "<td><a href=\"elimina_liga.php?liga=$ligaId\">Elimina</a></td>";
-            }
+?>
+        <tr>
+            <td>
+                <a href="ver_liga.php?liga=<?=$ligaId?>"><?=$ligaNombre?></a>
+            </td>
+            <td>
+                <?= transforma_date($ligaFecha)?>
+            </td>
+            <?php
+            if (isset($_SESSION['username'])) {?>
+                <td>
+                    <a href="elimina_liga.php?liga=<?=$ligaId?>" class="mdi mdi-trash-can">
+                    <span>Elimina</span>
+                </a>
+            </td>
+           <?php } 
         echo "</tr>";
         }
-        
         echo "</table>";
         if(isset($_SESSION['username'])){?>
         <a href="nueva_liga.php">Nueva liga</a>

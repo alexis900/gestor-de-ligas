@@ -5,33 +5,43 @@ function head($title){
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <!--<link rel="stylesheet" href="css/main.css">-->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/3.4.93/css/materialdesignicons.min.css">
     <title><?=$title?></title>
 </head>
 <body>
-    <header>
+    <header class="accent-color">
+        <h1><a href="index.php">Gestor de ligas</a></h1>
         <nav>
-            <h1><a href="index.php">Gestor de ligas</a></h1>
-            <div id="user">
-                <ul>
+            <ul>
 <?php
-            if (isset($_SESSION['username'])) {
-                $username = $_SESSION['username'];
-                echo "<li>¡Hola, $username!</li>";
-                ?>
-                <li><a href="logout.php">Cerrar la sesión</a></li>
-                <?php
-            } else {
+        if (!isset($_SESSION['username'])) {
 ?>
-                <li><a href="login.php">Iniciar sesión</a></li>
+                <li>
+                    <a href="login.php" class="mdi mdi-account">
+                        <span>Iniciar sesión</span>
+                    </a>
+                </li>
 <?php
-            }
+        } else { 
+?>              <li>
+                    <a href="#">
+                        <span><?= $_SESSION['username']?></span>
+                    </a>
+                </li>
+                <li>
+                    <a href="logout.php" class="mdi mdi-account">
+                        <span>Cerrar sesión</span>
+                    </a>
+                </li>
+<?php
+                }
 ?>
             </ul>
-        </div>
         </nav>
     </header>
     <main>
+
 <?php
 }
 
@@ -63,4 +73,14 @@ function enfrentamientos($nume) {
         }      
     }
     return $t;
+}
+
+function transforma_date($fecha){
+    $t = date_create($fecha);
+    return date_format($t, 'd/m/Y');
+}
+
+function transforma_datetime($fecha){
+    $t = date_create($fecha);
+    return date_format($t, 'd/m/Y H:i:s');
 }

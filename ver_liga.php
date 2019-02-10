@@ -97,8 +97,9 @@ while($row = mysqli_fetch_row($rst)){
     <?php
     
     $count = mysqli_query($con, "select distinct ronda_num from partido where liga_id='$ligaId'");
-    for ($i=1; $i <= mysqli_num_rows($count); $i++) {
-        echo "<li><a href=\"ver_ronda.php?liga=$ligaId&ronda=$i\">$i</a></li>";
+    for ($i=1; $i <= mysqli_num_rows($count); $i++) { ?>
+        <li><a href="ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$i?>"><?=$i?></a></li>
+        <?php
     }
     
     ?>

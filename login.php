@@ -27,8 +27,10 @@ if (isset($_POST['username']) && isset($_POST['passwd'])) {
 }
 
 ?>
-<form action="login.php" method="post">
+<form action="login.php" method="post" class="login">
+    <label for="username">Nombre de usuario</label>
     <input type="text" name="username" id="username"><br>
+    <label for="passwd">Contraseña</label>
     <input type="password" name="passwd" id="passwd"><br>
     <input type="submit" value="Inicia sesión">
 </form>
