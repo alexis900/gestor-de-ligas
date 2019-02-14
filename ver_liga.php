@@ -69,19 +69,20 @@ while($row = mysqli_fetch_row($rst)){
     <tr>
         <th>Equipo</th>
         <th>Pts</th>
-        <th>PJ</th></th>
+        <th>PJ</th>
+        </th>
         <th>PG</th>
         <th>PP</th>
         <th>PE</th>
     </tr>
     <?php
-    
+        
     $count = count($equipos);
     $num = $id-$count;
     for ($i = $id-$count+1; $i <= $count+$num;$i++) {
     $pts = $equipos[$i]['PG'] * 3 + $equipos[$i]['PE'];
     echo "<tr>";
-        echo "<td>" . $equipos[$i]['nombre'] . "</td>";
+        echo "<td>" . utf8_encode($equipos[$i]['nombre']) . "</td>";
         echo "<td>" . $pts . "</td>";
         echo "<td>" . $equipos[$i]['PJ'] . "</td>";
         echo "<td>" . $equipos[$i]['PG'] . "</td>";
@@ -98,8 +99,8 @@ while($row = mysqli_fetch_row($rst)){
     
     $count = mysqli_query($con, "select distinct ronda_num from partido where liga_id='$ligaId'");
     for ($i=1; $i <= mysqli_num_rows($count); $i++) { ?>
-        <li><a href="ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$i?>"><?=$i?></a></li>
-        <?php
+    <li><a href="ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$i?>"><?=$i?></a></li>
+    <?php
     }
     
     ?>
@@ -109,7 +110,8 @@ while($row = mysqli_fetch_row($rst)){
     echo "<p>La liga no existe</p>";
 }
 ?>
-    <a href="index.php">Atrás</a>
-  </main>  
+<a href="index.php">Atrás</a>
+</main>
 </body>
+
 </html>

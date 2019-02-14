@@ -53,12 +53,12 @@ if ($par > 0) {
 
 ?>
 <!-- Comienza la tabla -->
-    <table>
-        <tr>
-            <th>Equipo 1</th>
-            <th colspan="2">Puntuación</th>
-            <th>Equipo 2</th>
-            <?php
+<table>
+    <tr>
+        <th>Equipo 1</th>
+        <th colspan="2">Puntuación</th>
+        <th>Equipo 2</th>
+        <?php
 
             //Si hay alguna fecha disponible, se mostrará la columna
             $mostrarFecha = false;
@@ -72,18 +72,21 @@ if ($par > 0) {
                 echo "<th>Fecha del partido</th>";
             }
             ?>
-        </tr>
-        <?php
+    </tr>
+    <?php
         $numPart = 0;
        //Si no tiene $_GET['partido'], se mostrarán todos los partidos. Si no, mostrará solo el partido seleccionado
         if (!isset($_GET['partido'])) {
             for ($i=0; $i < $par; $i++) {
                 echo "<tr>";
-                    echo "<td>" . $partido[$i]['e1'] . "</td>";
+                    echo "<td>" . utf8_encode($partido[$i]['e1']) . "</td>";
                     echo "<td>" . $partido[$i]['p1'] . "</td>";
                     echo "<td>" . $partido[$i]['p2'] . "</td>";
-                    echo "<td>" . $partido[$i]['e2'] . "</td>";
-                    echo "<td>" . transforma_datetime($partido[$i]['fecha']) . "</td>";
+                    echo "<td>" . utf8_encode($partido[$i]['e2']) . "</td>";
+                    if ($partido[$i]['fecha'] != null) {
+                        echo "<td>" . transforma_datetime($partido[$i]['fecha']) . "</td>";
+                    }
+                    
                     if (isset($_SESSION['username'])) {
                         if ($partido[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null) {
                             echo "<td><a href=\"ver_ronda.php?liga=$ligaId&ronda=$rondaId&partido=$i\">Modifica</a></td>";
@@ -99,7 +102,7 @@ if ($par > 0) {
                 header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
             }
         ?>
-        <form action="update_ronda.php" method="get">
+    <form action="update_ronda.php" method="get">
         <?php
         $partidoId = $_GET['partido'];
         $partId = $partido[$partidoId]['id'];
@@ -151,17 +154,16 @@ if ($par > 0) {
             
         echo "</tr>";
             ?>
-            
-        </form>
-        
-        
-        <?php
+
+    </form>
+    <?php
         }
     }
 }
     ?>
-    </table>
-    <a href="ver_liga.php?liga=<?=$ligaId?>">Atrás</a>
- </main>   
+</table>
+<a href="ver_liga.php?liga=<?=$ligaId?>">Atrás</a>
+</main>
 </body>
+
 </html>
