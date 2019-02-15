@@ -9,10 +9,7 @@ if (isset($_SESSION['username'])) {
 
 head("Log In");
 
-if (isset($_GET['error']) == 1) {
-    echo "<p class = \"error\">Usuario o contraseña incorrectos<p>";
-}
-
+//Comprueba si existe el usuario y la contraseña
 if (isset($_POST['username']) && isset($_POST['passwd'])) {
     $username = $_POST['username'];
     $passwd = md5($_POST['passwd']);
@@ -28,6 +25,14 @@ if (isset($_POST['username']) && isset($_POST['passwd'])) {
 
 ?>
 <form action="login.php" method="post" class="login">
+    <?php 
+    //Si hay algún error en las credenciales, muestra el siguiente mensaje
+    if (isset($_GET['error']) == 1) {?>
+    <div class="error">
+        <p>Usuario o contraseña incorrectos</p>
+    </div>
+    <?php
+    }?>
     <label for="username">Nombre de usuario</label>
     <input type="text" name="username" id="username"><br>
     <label for="passwd">Contraseña</label>

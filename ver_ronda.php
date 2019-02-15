@@ -78,18 +78,21 @@ if ($par > 0) {
        //Si no tiene $_GET['partido'], se mostrarán todos los partidos. Si no, mostrará solo el partido seleccionado
         if (!isset($_GET['partido'])) {
             for ($i=0; $i < $par; $i++) {
-                echo "<tr>";
-                    echo "<td>" . utf8_encode($partido[$i]['e1']) . "</td>";
-                    echo "<td>" . $partido[$i]['p1'] . "</td>";
-                    echo "<td>" . $partido[$i]['p2'] . "</td>";
-                    echo "<td>" . utf8_encode($partido[$i]['e2']) . "</td>";
+                ?>
+                <tr>
+                    <td><?=utf8_encode($partido[$i]['e1'])?></td>
+                    <td><?=$partido[$i]['p1']?></td>
+                    <td><?=$partido[$i]['p2']?></td>
+                    <td><?=utf8_encode($partido[$i]['e2'])?></td>
+                    <?php
                     if ($partido[$i]['fecha'] != null) {
                         echo "<td>" . transforma_datetime($partido[$i]['fecha']) . "</td>";
                     }
                     
                     if (isset($_SESSION['username'])) {
-                        if ($partido[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null) {
-                            echo "<td><a href=\"ver_ronda.php?liga=$ligaId&ronda=$rondaId&partido=$i\">Modifica</a></td>";
+                        if ($partido[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null) {?>
+                            <td><a href=ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$rondaId?>&partido=<?=$i?>>Modifica</a></td>
+                        <?php
                         }
                     }
                 echo "</tr>";
@@ -117,9 +120,10 @@ if ($par > 0) {
             $fecha = date_format(date_create($fecha_completa), 'Y-m-d');
             $hora = date_format(date_create($fecha_completa), 'H:i:s');
         }
-
-        echo "<tr>";
-            echo "<td>" . $partido[$partidoId]['e1'] . "</td>";
+?>
+        <tr>
+            <td><?=$partido[$partidoId]['e1']?></td>
+<?php
             if ($p1 > 0) {
                 echo "<td>" . $p2 . "</td>";
                 echo "<input type=\"hidden\" name=\"partido[$partId][p1]\" id=\"p1h\ value=\"$p1\"/>";
@@ -165,5 +169,4 @@ if ($par > 0) {
 <a href="ver_liga.php?liga=<?=$ligaId?>">Atrás</a>
 </main>
 </body>
-
 </html>

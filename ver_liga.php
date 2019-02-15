@@ -14,7 +14,7 @@ $row = mysqli_fetch_row($rst);
 $nombreLiga = $row[0];
 
 head($nombreLiga);
-echo "<h2>$nombreLiga</h2>";
+echo "<h2>$nombreLiga</h2>\n";
 
 //Obtenemos los equipos y los guardamos en un array junto con una serie de contadores:
 // PJ = Partidos Jugados
@@ -81,14 +81,16 @@ while($row = mysqli_fetch_row($rst)){
     $num = $id-$count;
     for ($i = $id-$count+1; $i <= $count+$num;$i++) {
     $pts = $equipos[$i]['PG'] * 3 + $equipos[$i]['PE'];
-    echo "<tr>";
-        echo "<td>" . utf8_encode($equipos[$i]['nombre']) . "</td>";
-        echo "<td>" . $pts . "</td>";
-        echo "<td>" . $equipos[$i]['PJ'] . "</td>";
-        echo "<td>" . $equipos[$i]['PG'] . "</td>";
-        echo "<td>" . $equipos[$i]['PP'] . "</td>";
-        echo "<td>" . $equipos[$i]['PE'] . "</td>";
-    echo "</tr>";    
+?>
+    <tr>
+        <td><?=utf8_encode($equipos[$i]['nombre'])?></td>
+        <td><?=$pts?></td>
+        <td><?=$equipos[$i]['PJ']?></td>
+        <td><?=$equipos[$i]['PG']?></td>
+        <td><?=$equipos[$i]['PP']?></td>
+        <td><?=$equipos[$i]['PE']?></td>
+    </tr>
+<?php  
     }
     
 ?>
