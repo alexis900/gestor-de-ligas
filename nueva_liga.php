@@ -69,7 +69,7 @@ head("Inserta ligas");
         $numEquipos = 0;
         $ligaId = mysqli_insert_id($con);
         foreach($equipos as $equipo){
-            $sql = "insert into equipo (liga_id, nombre) values ($ligaId,'" . strip_tags($equipo) . "')";
+            $sql = "insert into equipo (liga_id, nombre) values ($ligaId,'" . utf8_decode(strip_tags($equipo)) . "')";
             mysqli_query($con, $sql);
             $ids[] = mysqli_insert_id($con);
         }

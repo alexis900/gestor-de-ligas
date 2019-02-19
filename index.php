@@ -11,6 +11,12 @@ $rst = mysqli_query($con, $sql);
     <tr>
         <th>Liga</th>
         <th>Fecha</th>
+        <?php 
+        if (isset($_SESSION['username'])) {
+            echo "<th>Elimina una liga</th>";
+        }
+        
+        ?>
     </tr>
 
     <?php 
@@ -35,16 +41,22 @@ $rst = mysqli_query($con, $sql);
                 <span>Elimina</span>
             </a>
         </td>
-        <?php } 
-        echo "</tr>";
+    </tr>
+        <?php }
         }
-        echo "</table>";
+        
         if(isset($_SESSION['username'])){?>
-        <a href="nueva_liga.php">Nueva liga</a>
+        <tr>
+            <td colspan="3">
+                <a href="nueva_liga.php" class="mdi mdi-plus">
+                    <span>Nueva liga</span>
+                </a>
+            </td>
+        </tr>
         <?php
         }
     ?>
+            </table>
         </main>
-        </body>
-
-        </html>
+    </body>
+</html>

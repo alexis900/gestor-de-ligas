@@ -95,18 +95,20 @@ while($row = mysqli_fetch_row($rst)){
     
 ?>
 </table>
+<div id="ronda">
 <h3>Rondas: </h3>
-<ul>
+<ul class="ronda">
     <?php
     
     $count = mysqli_query($con, "select distinct ronda_num from partido where liga_id='$ligaId'");
     for ($i=1; $i <= mysqli_num_rows($count); $i++) { ?>
-    <li><a href="ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$i?>"><?=$i?></a></li>
+    <li class="numRonda"><a href="ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$i?>"><?=$i?></a></li>
     <?php
     }
     
     ?>
 </ul>
+</div>
 <?php
 } else {
     echo "<p>La liga no existe</p>";

@@ -85,3 +85,32 @@ main {
    margin: 10px;
    background-color: red;
 }
+
+/* Tablas */
+
+table {
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+   padding: 10px;
+}
+
+/* Rondas */
+
+#ronda {
+   position: relative;
+}
+
+.ronda {
+   position: absolute;
+   list-style-type: none;
+}
+
+.numRonda {
+   display: inline-block;
+}
