@@ -66,7 +66,7 @@ while($row = mysqli_fetch_row($rst)){
     
 ?>
 <table>
-    <tr>
+    <tr class="accent-color">
         <th>Equipo</th>
         <th>Pts</th>
         <th>PJ</th>

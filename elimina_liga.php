@@ -3,7 +3,7 @@ require_once("includes/functions.php");
 require_once("db.php");
 session_start();
 head("Elimina");
-if ($_SESSION['username']) {
+if (isSession()) {
     if (isset($_GET['liga'])) {
         $ligaId = $_GET['liga'];
         if (isset($_GET['si']) == "on") {

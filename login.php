@@ -3,11 +3,11 @@ require_once('includes/functions.php');
 require_once('db.php');
 session_start();
 
-if (isset($_SESSION['username'])) {
+if (isSession()) {
     header("Location: index.php");
 }
 
-head("Log In");
+head("Iniciar sesión");
 
 //Comprueba si existe el usuario y la contraseña
 if (isset($_POST['username']) && isset($_POST['passwd'])) {
@@ -30,7 +30,8 @@ if (isset($_POST['username']) && isset($_POST['passwd'])) {
 }
 
 ?>
-<form action="login.php" method="post" class="login">
+<form action="login.php" method="post" id="login">
+    <h2>Iniciar sesión</h2>
     <?php 
     //Si hay algún error en las credenciales, muestra el siguiente mensaje
     if (isset($_GET['error']) == 1) {?>
@@ -43,11 +44,10 @@ if (isset($_POST['username']) && isset($_POST['passwd'])) {
     <input type="text" name="username" id="username" value="<?= isset($_COOKIE['username']) ? $_COOKIE['username'] : "";?>"><br>
     <label for="passwd">Contraseña</label>
     <input type="password" name="passwd" id="passwd"><br>
-    <input type="checkbox" name="check" id="check" <?= $checked = isset($_COOKIE['username']) ? "checked" : "";?>
+    <input type="checkbox" name="check" id="check" <?= $checked = isset($_COOKIE['username']) ? "checked" : "";?>/>
     <label for="check">Recuerda el nombre de usuario</label><br>
     <input type="submit" value="Inicia sesión">
 </form>
 </main>
 </body>
-
 </html>

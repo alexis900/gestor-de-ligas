@@ -1,7 +1,8 @@
 <?php
 require_once("db.php");
+require_once("includes/functions.php");
 session_start();
-if (isset($_SESSION['username'])) {
+if (isSession()) {
     // Coge la ID del partido
     foreach($_GET as $get => $partido){
         foreach ($partido as $partidos => $valor) {

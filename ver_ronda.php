@@ -5,6 +5,7 @@ session_start();
 if (!isset($_GET['liga']) || empty($_GET['liga']) || !is_numeric($_GET['liga']) || !isset($_GET['ronda']) || empty($_GET['ronda']) || !is_numeric($_GET['ronda'])) {
     header("Location: index.php");
 }
+$session = isSession();
 $ligaId = $_GET['liga'];
 $rondaId = $_GET['ronda'];
 
@@ -50,28 +51,28 @@ while($row = mysqli_fetch_row($rst)){
 }
 
 if ($par > 0) {
+$modifica = false;
+if ($session) {
+    for ($i=0; $i < $par; $i++) {
+        if ($partido[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null) {
+            $modifica = true;
+        }
+    }
+}
 
 ?>
 <!-- Comienza la tabla -->
 <table>
-    <tr>
+    <tr class="accent-color">
         <th>Equipo 1</th>
         <th colspan="2">Puntuación</th>
         <th>Equipo 2</th>
+        <th>Fecha del partido</th>
         <?php
-
-            //Si hay alguna fecha disponible, se mostrará la columna
-            $mostrarFecha = false;
-            for($i = 0; $i < $par;$i++){
-                if ($partido[$i]['fecha'] != null || isset($_GET['partido'])) {
-                    $mostrarFecha = true;
-                }
-            }
-
-            if($mostrarFecha){
-                echo "<th>Fecha del partido</th>";
-            }
-            ?>
+        if ($modifica) {
+            echo "<th>Modifica el partido</th>";
+        }
+        ?>
     </tr>
     <?php
        //Si no tiene $_GET['partido'], se mostrarán todos los partidos. Si no, mostrará solo el partido seleccionado
@@ -90,17 +91,15 @@ if ($par > 0) {
                         echo "<td>" . transforma_datetime($partido[$i]['fecha']) . "</td>";
                         }
                     
-                    if (isset($_SESSION['username'])) {
-                        if ($partido[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null) {?>
-                            <td><a href=ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$rondaId?>&partido=<?=$i?>>Modifica</a></td>
+                    if ($modifica) {?>
+                            <td><a href=ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$rondaId?>&partido=<?=$i?> class="mdi mdi-edit">Modifica</a></td>
                         <?php
-                        }
                     }
                 echo "</tr>";
             }
     } else {
         
-        if (isset($_SESSION['username'])) {
+        if ($session) {
             if ($_GET['partido'] == null || $_GET['partido'] > $par) {
                 header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
             }

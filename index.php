@@ -3,16 +3,16 @@ require_once("includes/functions.php");
 require_once("db.php");
 session_start();
 head("Inicio");
-
+$session = isSession();
 $sql = "SELECT * FROM liga";
 $rst = mysqli_query($con, $sql);
 ?>
 <table>
-    <tr>
+    <tr class="accent-color">
         <th>Liga</th>
         <th>Fecha</th>
         <?php 
-        if (isset($_SESSION['username'])) {
+        if ($session) {
             echo "<th>Elimina una liga</th>";
         }
         
@@ -35,7 +35,7 @@ $rst = mysqli_query($con, $sql);
             <?= transforma_date($ligaFecha)?>
         </td>
         <?php
-            if (isset($_SESSION['username'])) {?>
+            if ($session) {?>
         <td>
             <a href="elimina_liga.php?liga=<?=$ligaId?>" class="mdi mdi-trash-can">
                 <span>Elimina</span>
@@ -45,7 +45,7 @@ $rst = mysqli_query($con, $sql);
         <?php }
         }
         
-        if(isset($_SESSION['username'])){?>
+        if($session){?>
         <tr>
             <td colspan="3">
                 <a href="nueva_liga.php" class="mdi mdi-plus">

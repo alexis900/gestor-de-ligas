@@ -2,7 +2,7 @@
 require_once("includes/functions.php");
 require_once("db.php");
 session_start();
-if (isset($_SESSION['username'])) {
+if (isSession()) {
 head("Inserta ligas");
   
     if (isset($_POST['liga']) && !empty($_POST['equipos'])) {
@@ -98,7 +98,8 @@ head("Inserta ligas");
 Formulario para insertar las ligas. 
 Si hay algún error, no tendremos que volver a escribir los nombres, estos se guardan.
     -->
-<form action="nueva_liga.php" method="post">
+
+<form action="nueva_liga.php" method="post" id="nuevaLiga">
     <span>Nombre de la liga: <?= isset($mensaje) ? $mensaje : null ?></span><br><input type="text" name="liga" id="liga" value="<?= isset($_POST['liga']) ? $_POST['liga'] : null ?>"><br />
     <span>Nombre de los equipos:</span><br>
     <textarea name="equipos" id="textbox" cols="30" rows="10"><?php

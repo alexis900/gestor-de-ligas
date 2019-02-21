@@ -84,3 +84,11 @@ function transforma_datetime($fecha){
     $t = date_create($fecha);
     return date_format($t, 'd/m/Y H:i:s');
 }
+
+function isSession(){
+    $session = false;
+    if (isset($_SESSION['username'])) {
+        $session = true;
+    }
+    return $session;
+}
