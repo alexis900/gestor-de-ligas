@@ -7,18 +7,19 @@ $session = isSession();
 $sql = "SELECT * FROM liga";
 $rst = mysqli_query($con, $sql);
 ?>
-<table>
-    <tr class="accent-color">
-        <th>Liga</th>
-        <th>Fecha</th>
-        <?php 
-        if ($session) {
-            echo "<th>Elimina una liga</th>";
-        }
-        
-        ?>
-    </tr>
-
+<table id="index">
+    <thead>
+        <tr class="accent-color">
+            <th>Liga</th>
+            <th>Fecha</th>
+            <?php 
+            if ($session) {
+                echo "<th>Elimina una liga</th>";
+            }
+            
+            ?>
+        </tr>
+    </thead>
     <?php 
         while ($row = mysqli_fetch_row($rst)) {
 
@@ -27,8 +28,9 @@ $rst = mysqli_query($con, $sql);
         $ligaNombre = $row[1];
         $ligaFecha = $row[2];
 ?>
+    <tbody>
     <tr>
-        <td>
+        <td class="verLiga">
             <a href="ver_liga.php?liga=<?=$ligaId?>"><?=$ligaNombre?></a>
         </td>
         <td>
@@ -36,23 +38,27 @@ $rst = mysqli_query($con, $sql);
         </td>
         <?php
             if ($session) {?>
-        <td>
+        <td class="elimina">
             <a href="elimina_liga.php?liga=<?=$ligaId?>" class="mdi mdi-trash-can">
                 <span>Elimina</span>
             </a>
         </td>
     </tr>
+            </tbody>
+            
         <?php }
         }
         
         if($session){?>
+        <tfoot>
         <tr>
-            <td colspan="3">
+            <td colspan="3" class="nuevaLiga">
                 <a href="nueva_liga.php" class="mdi mdi-plus">
                     <span>Nueva liga</span>
                 </a>
             </td>
         </tr>
+        </tfoot>
         <?php
         }
     ?>

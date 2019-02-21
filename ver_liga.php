@@ -66,6 +66,7 @@ while($row = mysqli_fetch_row($rst)){
     
 ?>
 <table>
+<thead>
     <tr class="accent-color">
         <th>Equipo</th>
         <th>Pts</th>
@@ -74,7 +75,9 @@ while($row = mysqli_fetch_row($rst)){
         <th>PG</th>
         <th>PP</th>
         <th>PE</th>
+
     </tr>
+    </thead>
     <?php
         
     $count = count($equipos);
@@ -82,6 +85,7 @@ while($row = mysqli_fetch_row($rst)){
     for ($i = $id-$count+1; $i <= $count+$num;$i++) {
     $pts = $equipos[$i]['PG'] * 3 + $equipos[$i]['PE'];
 ?>
+<tbody>
     <tr>
         <td><?=utf8_encode($equipos[$i]['nombre'])?></td>
         <td><?=$pts?></td>
@@ -90,6 +94,7 @@ while($row = mysqli_fetch_row($rst)){
         <td><?=$equipos[$i]['PP']?></td>
         <td><?=$equipos[$i]['PE']?></td>
     </tr>
+    </tbody>
 <?php  
     }
     

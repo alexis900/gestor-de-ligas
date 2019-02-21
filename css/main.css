@@ -105,11 +105,30 @@ main {
 /* Tablas */
 
 table {
+  position: relative;
+  top: 30px;
   border-collapse: collapse;
+  border-radius: 5px;
 }
 
 th, td {
    padding: 10px;
+}
+
+tbody tr:hover {
+   background-color: rgba(25, 135, 199, 0.541);
+}
+
+.elimina, .nuevaLiga {
+   text-align: center;
+}
+
+.verLiga {
+   text-align: right;
+}
+
+.verLiga:hover {
+   color: red;
 }
 
 /* Rondas */

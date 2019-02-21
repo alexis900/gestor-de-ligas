@@ -63,6 +63,7 @@ if ($session) {
 ?>
 <!-- Comienza la tabla -->
 <table>
+    <thead>
     <tr class="accent-color">
         <th>Equipo 1</th>
         <th colspan="2">Puntuación</th>
@@ -74,6 +75,7 @@ if ($session) {
         }
         ?>
     </tr>
+</thead>
     <?php
        //Si no tiene $_GET['partido'], se mostrarán todos los partidos. Si no, mostrará solo el partido seleccionado
         if (!isset($_GET['partido'])) {
@@ -81,8 +83,8 @@ if ($session) {
                 ?>
                 <tr>
                     <td><?=$partido[$i]['e1']?></td>
-                    <td><?= $partido[$i]['p1'] == null ? $partido[$i]['p1'] : 0; ?></td>
-                    <td><?= $partido[$i]['p2'] == null ? $partido[$i]['p2'] : 0; ?></td>
+                    <td><?= $partido[$i]['p1'] != null ? $partido[$i]['p1'] : 0; ?></td>
+                    <td><?= $partido[$i]['p2'] != null ? $partido[$i]['p2'] : 0; ?></td>
                     <td><?=$partido[$i]['e2']?></td>
                     <?php
                         if ($partido[$i]['fecha'] == null) {
@@ -92,7 +94,7 @@ if ($session) {
                         }
                     
                     if ($modifica) {?>
-                            <td><a href=ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$rondaId?>&partido=<?=$i?> class="mdi mdi-edit">Modifica</a></td>
+                            <td><a href=ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$rondaId?>&partido=<?=$i?> class="mdi mdi-pencil">Modifica</a></td>
                         <?php
                     }
                 echo "</tr>";
@@ -125,14 +127,14 @@ if ($session) {
 <?php
             if ($p1 > 0) {
                 echo "<td>" . $p1 . "</td>";
-                echo "<input type=\"hidden\" name=\"partido[$partId][p1]\" id=\"p1\ value=\"$p1\"/>";
+                echo "<input type=\"hidden\" name=\"partido[$partId][p1]\" id=\"p1\" value=\"$p1\"/>";
             } else {
                 echo "<td><input type=\"number\" name=\"partido[$partId][p1]\" id=\"p1\" min=\"0\" max=\"100\"></td>";
             }
 
             if ($p2 > 0) {
                 echo "<td>" . $p2 . "</td>";
-                echo "<input type=\"hidden\" name=\"partido[$partId][p2]\" id=\"p2\ value=\"$p2\"/>";
+                echo "<input type=\"hidden\" name=\"partido[$partId][p2]\" id=\"p2\" value=\"$p2\"/>";
             } else {
                 echo "<td><input type=\"number\" name=\"partido[$partId][p2]\" id=\"p2\" min=\"0\" max=\"100\"></td>";
             }
