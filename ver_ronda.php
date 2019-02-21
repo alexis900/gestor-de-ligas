@@ -37,8 +37,8 @@ $rst = mysqli_query($con,$sql);
 $par = 0;
 while($row = mysqli_fetch_row($rst)){
     $partido[$par]['id'] = $row[0];
-    $partido[$par]['e1'] = $row[1];
-    $partido[$par]['e2'] = $row[2];
+    $partido[$par]['e1'] = utf8_encode($row[1]);
+    $partido[$par]['e2'] = utf8_encode($row[2]);
     $partido[$par]['p1'] = $row[3];
     $partido[$par]['p2'] = $row[4];
     $partido[$par]['fecha'] = $row[5];
@@ -63,7 +63,7 @@ if ($par > 0) {
             //Si hay alguna fecha disponible, se mostrará la columna
             $mostrarFecha = false;
             for($i = 0; $i < $par;$i++){
-                if ($partido[$i]['fecha'] != null) {
+                if ($partido[$i]['fecha'] != null || isset($_GET['partido'])) {
                     $mostrarFecha = true;
                 }
             }
@@ -74,20 +74,21 @@ if ($par > 0) {
             ?>
     </tr>
     <?php
-        $numPart = 0;
        //Si no tiene $_GET['partido'], se mostrarán todos los partidos. Si no, mostrará solo el partido seleccionado
         if (!isset($_GET['partido'])) {
             for ($i=0; $i < $par; $i++) {
                 ?>
                 <tr>
-                    <td><?=utf8_encode($partido[$i]['e1'])?></td>
-                    <td><?=$partido[$i]['p1']?></td>
-                    <td><?=$partido[$i]['p2']?></td>
-                    <td><?=utf8_encode($partido[$i]['e2'])?></td>
+                    <td><?=$partido[$i]['e1']?></td>
+                    <td><?= $partido[$i]['p1'] == null ? $partido[$i]['p1'] : 0; ?></td>
+                    <td><?= $partido[$i]['p2'] == null ? $partido[$i]['p2'] : 0; ?></td>
+                    <td><?=$partido[$i]['e2']?></td>
                     <?php
-                    if ($partido[$i]['fecha'] != null) {
+                        if ($partido[$i]['fecha'] == null) {
+                        echo "<td>Fecha no disponible</td>";
+                        } else {
                         echo "<td>" . transforma_datetime($partido[$i]['fecha']) . "</td>";
-                    }
+                        }
                     
                     if (isset($_SESSION['username'])) {
                         if ($partido[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null) {?>
@@ -96,12 +97,11 @@ if ($par > 0) {
                         }
                     }
                 echo "</tr>";
-                $numPart++;
             }
     } else {
         
         if (isset($_SESSION['username'])) {
-            if ($_GET['partido'] == NULL || $_GET['partido'] > $numPart) {
+            if ($_GET['partido'] == null || $_GET['partido'] > $par) {
                 header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
             }
         ?>
@@ -125,23 +125,23 @@ if ($par > 0) {
             <td><?=$partido[$partidoId]['e1']?></td>
 <?php
             if ($p1 > 0) {
-                echo "<td>" . $p2 . "</td>";
-                echo "<input type=\"hidden\" name=\"partido[$partId][p1]\" id=\"p1h\ value=\"$p1\"/>";
+                echo "<td>" . $p1 . "</td>";
+                echo "<input type=\"hidden\" name=\"partido[$partId][p1]\" id=\"p1\ value=\"$p1\"/>";
             } else {
                 echo "<td><input type=\"number\" name=\"partido[$partId][p1]\" id=\"p1\" min=\"0\" max=\"100\"></td>";
             }
 
             if ($p2 > 0) {
-                echo "<td>" . $p1 . "</td>";
-                echo "<input type=\"hidden\" name=\"partido[$partId][p2]\" id=\"p1h\ value=\"$p2\"/>";
+                echo "<td>" . $p2 . "</td>";
+                echo "<input type=\"hidden\" name=\"partido[$partId][p2]\" id=\"p2\ value=\"$p2\"/>";
             } else {
                 echo "<td><input type=\"number\" name=\"partido[$partId][p2]\" id=\"p2\" min=\"0\" max=\"100\"></td>";
             }
             echo "<td>" . $partido[$partidoId]['e2'] . "</td>";
 
             if ($fecha_completa == null) {
-                echo "<td><input type=\"date\" name=\"partido[$partId][date]\" id=\"date\" value=\"". date('Y-m-d') . "\"></td>";
-                echo "<td><input type=\"time\" name=\"partido[$partId][time]\" id=\"time\" value=\"". date("H:i") ."\"></td>";
+                echo "<td><input type=\"date\" name=\"partido[$partId][date]\" id=\"date\" value=\"". date('Y-m-d') . "\">";
+                echo "<input type=\"time\" name=\"partido[$partId][time]\" id=\"time\" value=\"". date("H:i") ."\"></td>";
             } else {
                 echo "<td>$fecha_completa</td>";
                 echo "<input type=\"hidden\" name=\"partido[$partId][date]\" value=\"$fecha\">";
