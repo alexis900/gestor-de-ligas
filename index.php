@@ -51,7 +51,7 @@ $rst = mysqli_query($con, $sql);
         
         if($session){?>
         <tfoot>
-        <tr>
+        <tr class="accent-color">
             <td colspan="3" class="nuevaLiga">
                 <a href="nueva_liga.php" class="mdi mdi-plus">
                     <span>Nueva liga</span>

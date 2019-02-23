@@ -40,23 +40,25 @@ head("Inserta ligas");
             $nLiga = true;
         }
         if ($nLiga || $lDuplicados || $eDuplicados || $fEquipos) {
-            $mensaje = "";
+            $mensaje = "<div class=\"error\">";
             //Mensajes
             if ($lDuplicados) {
-                $mensaje .=  "<span>La liga ya está en la base de datos.</span>";
+                $mensaje .=  "<span>La liga ya está en la base de datos</span><br>";
             }
 
             if ($nLiga) {
-                $mensaje .= "<span>No hay nombre en la liga.</span>";
+                $mensaje .= "<span>No hay nombre en la liga</span><br>";
             }
 
             if ($eDuplicados) {
-                $mensaje .= "<span>Los equipos están duplicados.</span>";
+                $mensaje .= "<span>Los equipos están duplicados</span><br>";
             }
 
             if ($fEquipos) {
-                $mensaje .= "<span>Hay pocos equipos.</span>";
+                $mensaje .= "<span>Hay pocos equipos</span><br>";
             }
+
+            $mensaje .= "</div>";
         }
 
         //Si no hay duplicados y hay suficientes equipos se insertará en la base de datos
@@ -100,7 +102,9 @@ Si hay algún error, no tendremos que volver a escribir los nombres, estos se gu
     -->
 
 <form action="nueva_liga.php" method="post" id="nuevaLiga">
-    <span>Nombre de la liga: <?= isset($mensaje) ? $mensaje : null ?></span><br><input type="text" name="liga" id="liga" value="<?= isset($_POST['liga']) ? $_POST['liga'] : null ?>"><br />
+    <h2>Insertar liga</h2>
+    <?= isset($mensaje) ? $mensaje : null ?>
+    <span>Nombre de la liga: </span><br><input type="text" name="liga" id="liga" value="<?= isset($_POST['liga']) ? $_POST['liga'] : null ?>"><br />
     <span>Nombre de los equipos:</span><br>
     <textarea name="equipos" id="textbox" cols="30" rows="10"><?php
                 if (!empty($_POST['equipos'])) {

@@ -5,7 +5,7 @@
 
 .accent-color { background-color: blue;}
 .mdi, .accent-color, a {color: black; text-decoration: none;}
-tr.accent-color {color: white;}
+tr.accent-color, tr.accent-color a {color: white;}
 
 body, html {
 	font-family: 'Roboto', sans-serif;
@@ -58,7 +58,7 @@ main {
    top: 90px;
 }
 
- /* Login */
+ /* Login + Nueva liga*/
 
 #login, #nuevaLiga {
    position: relative;
@@ -68,11 +68,12 @@ main {
     width: 400px;
     top: 50%;
     left: 50%;
-    transform: translate(-50%, 50%);
+    transform: translate(-50%, 20%);
  }
 
+/* Inputs */
 
- input[type='text'], input[type='password'],  input[type='submit'], textarea {
+input, textarea {
     font-family: 'Roboto', sans-serif;
     margin: 2px 1px;
     border-radius: 5px;
@@ -90,16 +91,20 @@ main {
     width: 100%;
  }
 
+ input[type='date'], input[type='time'], input[type='number'] {
+    text-align: center;
+    height: 30px;
+ }
  
 /* Errores */
 
 .error {
-   position: relative;
-   padding: 2px 5px;
+   padding: 5px 2px;
    margin: 10px;
    text-align: center;
    background-color:rgba(231, 16, 16, 0.8);
-   
+   border-radius: 5px;
+   color: white;
 }
 
 /* Tablas */
@@ -108,11 +113,14 @@ table {
   position: relative;
   top: 30px;
   border-collapse: collapse;
-  border-radius: 5px;
 }
 
 th, td {
    padding: 10px;
+}
+
+tbody tr:nth-child(2n+1) {
+  background: rgba(234, 255, 210, 0.8);
 }
 
 tbody tr:hover {
@@ -123,6 +131,10 @@ tbody tr:hover {
    text-align: center;
 }
 
+.nuevaLiga {
+   border-bottom-right-radius: 5px;
+   border-bottom-left-radius: 5px;
+}
 .verLiga {
    text-align: right;
 }
@@ -132,10 +144,6 @@ tbody tr:hover {
 }
 
 /* Rondas */
-
-#ronda {
-   position: relative;
-}
 
 .ronda {
    position: absolute;

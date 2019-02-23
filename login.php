@@ -36,7 +36,7 @@ if (isset($_POST['username']) && isset($_POST['passwd'])) {
     //Si hay algún error en las credenciales, muestra el siguiente mensaje
     if (isset($_GET['error']) == 1) {?>
     <div class="error">
-        <p>Usuario o contraseña incorrectos</p>
+        <span>Usuario o contraseña incorrectos</span>
     </div>
     <?php
     }?>

@@ -100,7 +100,6 @@ while($row = mysqli_fetch_row($rst)){
     
 ?>
 </table>
-<div id="ronda">
 <h3>Rondas: </h3>
 <ul class="ronda">
     <?php
@@ -113,7 +112,6 @@ while($row = mysqli_fetch_row($rst)){
     
     ?>
 </ul>
-</div>
 <?php
 } else {
     echo "<p>La liga no existe</p>";
