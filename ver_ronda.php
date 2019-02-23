@@ -29,7 +29,7 @@ $title = $nombreLiga . " - Ronda $rondaId";
 head($title);
 echo "<h2>$title</h2>";
 
-// Selecciona la información que necessitaremos
+// Selecciona la información que necessitaremos y lo guardamos en variables
 $sql = "select p.id, e1.nombre, e2.nombre, puntos1, puntos2, fecha from partido p 
 inner join equipo e1 on e1.id = p.equipo1_id 
 inner join equipo e2 on e2.id = p.equipo2_id 
@@ -51,8 +51,10 @@ while($row = mysqli_fetch_row($rst)){
 }
 
 if ($par > 0) {
+//Comprueba si se tienen permisos para modificar
 $modifica = false;
 if ($session) {
+    //Comprueba que partido se puede modificar
     for ($i=0; $i < $par; $i++) {
         if ($partido[$i]['p1'] == null || $partido[$i]['p2'] == null || $partido[$i]['fecha'] == null) {
             $modifica = true;
@@ -106,7 +108,7 @@ if ($session) {
                 header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
             }
         ?>
-    <form action="update_ronda.php" method="get">
+       <form action="update_ronda.php" method="get">
         <?php
         $partidoId = $_GET['partido'];
         $partId = $partido[$partidoId]['id'];
@@ -124,7 +126,7 @@ if ($session) {
 ?>
         <tr>
             <td><?=$partido[$partidoId]['e1']?></td>
-<?php
+<?php       
             if ($p1 > 0) {
                 echo "<td>" . $p1 . "</td>";
                 echo "<input type=\"hidden\" name=\"partido[$partId][p1]\" id=\"p1\" value=\"$p1\"/>";

@@ -37,6 +37,8 @@ $rst = mysqli_query($con, $sql);
             <?= transforma_date($ligaFecha)?>
         </td>
         <?php
+
+        //Si tien la sesión iniciada, se muestra la columna para eliminar
             if ($session) {?>
         <td class="elimina">
             <a href="elimina_liga.php?liga=<?=$ligaId?>" class="mdi mdi-trash-can">
@@ -48,7 +50,7 @@ $rst = mysqli_query($con, $sql);
             
         <?php }
         }
-        
+        //Si tiene la sesión iniciada, puede ver el enlace nuevaLiga
         if($session){?>
         <tfoot>
         <tr class="accent-color">

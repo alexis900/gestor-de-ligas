@@ -22,7 +22,7 @@ if (isSession()) {
     if (mysqli_query($con, $sql)) {
         header("Location: ver_ronda.php?liga=$ligaId&ronda=$rondaId");
     } else {
-        echo "Error updating record: " . mysqli_error($con);
+        header("Location: index.php");
     }
 } else {
     header("Location: index.php");

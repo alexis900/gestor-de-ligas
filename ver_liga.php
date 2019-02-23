@@ -79,7 +79,7 @@ while($row = mysqli_fetch_row($rst)){
     </tr>
     </thead>
     <?php
-        
+    //Hace un bucle de todos los equipos de la liga y su información
     $count = count($equipos);
     $num = $id-$count;
     for ($i = $id-$count+1; $i <= $count+$num;$i++) {

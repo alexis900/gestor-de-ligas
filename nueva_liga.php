@@ -28,7 +28,7 @@ head("Inserta ligas");
              $eDuplicados = true;
         }
 
-        //Comrpueba que hay como mínimo 3 equipos
+        //Comrprueba que hay como mínimo 3 equipos
         $numEq = count($equipos);
         $fEquipos = false;
         if ($numEq <= 2) {
@@ -39,6 +39,8 @@ head("Inserta ligas");
         if (empty($_POST['liga'])) {
             $nLiga = true;
         }
+
+        //Comprueba los mensajes que tendrá que insertar
         if ($nLiga || $lDuplicados || $eDuplicados || $fEquipos) {
             $mensaje = "<div class=\"error\">";
             //Mensajes
@@ -104,9 +106,11 @@ Si hay algún error, no tendremos que volver a escribir los nombres, estos se gu
 <form action="nueva_liga.php" method="post" id="nuevaLiga">
     <h2>Insertar liga</h2>
     <?= isset($mensaje) ? $mensaje : null ?>
+    <!-- Autocompleta las ligas si hay algún error -->
     <span>Nombre de la liga: </span><br><input type="text" name="liga" id="liga" value="<?= isset($_POST['liga']) ? $_POST['liga'] : null ?>"><br />
     <span>Nombre de los equipos:</span><br>
     <textarea name="equipos" id="textbox" cols="30" rows="10"><?php
+    //Autorrellena los equipos si hay algún error
                 if (!empty($_POST['equipos'])) {
                     foreach ($equipos as $key => $value) {
                         echo $value;

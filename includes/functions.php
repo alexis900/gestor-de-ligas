@@ -1,4 +1,5 @@
 <?php
+//Crea una función base para generar la estructura principal HTML, con la opción de cambiar el título
 function head($title){
 ?>
 <!DOCTYPE html>
@@ -74,17 +75,19 @@ function enfrentamientos($nume) {
     }
     return $t;
 }
-
+//Transforma la decha al formato deseado
 function transforma_date($fecha){
     $t = date_create($fecha);
     return date_format($t, 'd/m/Y');
 }
 
+//Transforma la fecha y hora al formato deseado
 function transforma_datetime($fecha){
     $t = date_create($fecha);
     return date_format($t, 'd/m/Y H:i:s');
 }
 
+//Comprueba si el usuario tiene la sesión abierta
 function isSession(){
     $session = false;
     if (isset($_SESSION['username'])) {

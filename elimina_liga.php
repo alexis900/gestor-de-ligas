@@ -4,6 +4,7 @@ require_once("db.php");
 session_start();
 head("Elimina");
 if (isSession()) {
+    //Si está marcado el checkbox, se eliminará toda la información de la liga
     if (isset($_GET['liga'])) {
         $ligaId = $_GET['liga'];
         if (isset($_GET['si']) == "on") {
