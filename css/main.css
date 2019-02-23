@@ -58,9 +58,9 @@ main {
    top: 90px;
 }
 
- /* Login + Nueva liga*/
+ /* Login + Nueva liga + Elimina Liga*/
 
-#login, #nuevaLiga {
+#login, #nuevaLiga, #eliminaLiga {
    position: relative;
     border: 1px solid #E1E1E1;
     border-radius: 5px;
@@ -71,7 +71,24 @@ main {
     transform: translate(-50%, 20%);
  }
 
+ /* Elimina liga */
+ #eliminaLiga {
+ width: 200px;
+ }
+
+ #eliminaLiga label,  #eliminaLiga input[type='submit'] {
+   position: relative;
+   left: 5px;
+ }
+
 /* Inputs */
+.elimina, .nuevaLiga, h2, .rondas, .p1, .p2, .modificaR {
+text-align: center;
+}
+
+table {
+   margin: auto;
+}
 
 input, textarea {
     font-family: 'Roboto', sans-serif;
@@ -95,7 +112,7 @@ input, textarea {
     text-align: center;
     height: 30px;
  }
- 
+
 /* Errores */
 
 .error {
@@ -110,8 +127,6 @@ input, textarea {
 /* Tablas */
 
 table {
-  position: relative;
-  top: 30px;
   border-collapse: collapse;
 }
 
@@ -127,10 +142,6 @@ tbody tr:hover {
    background-color: rgba(25, 135, 199, 0.541);
 }
 
-.elimina, .nuevaLiga {
-   text-align: center;
-}
-
 .nuevaLiga {
    border-bottom-right-radius: 5px;
    border-bottom-left-radius: 5px;
@@ -143,15 +154,24 @@ tbody tr:hover {
    color: red;
 }
 
-/* Rondas */
-
-.ronda {
-   position: absolute;
-   list-style-type: none;
+.ligaTitle {
+   color: blueviolet;
 }
 
+/* Rondas */
+
 .numRonda {
+   position: relative;
+   left: -15px;
    display: inline-block;
+   padding:  5px;
+   
+}
+
+.numRonda a:hover {
+   background-color: bisque;
+   padding: 5px 10px;
+   transition: all 0.1s ease-in-out;
 }
 
 /* Nueva liga */

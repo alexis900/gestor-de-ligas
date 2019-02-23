@@ -7,6 +7,7 @@ $session = isSession();
 $sql = "SELECT * FROM liga";
 $rst = mysqli_query($con, $sql);
 ?>
+<h2>Ligas</h2>
 <table id="index">
     <thead>
         <tr class="accent-color">

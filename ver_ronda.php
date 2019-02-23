@@ -27,6 +27,7 @@ if($rondaId <= 0 || $rondaId > $numRondas){
 // Proporciona el título de la página en el formato
 $title = $nombreLiga . " - Ronda $rondaId";
 head($title);
+$title = "<a href=\"ver_liga.php?liga=$ligaId\" class=\"ligaTitle\">$nombreLiga</a>" . " - Ronda $rondaId";
 echo "<h2>$title</h2>";
 
 // Selecciona la información que necessitaremos y lo guardamos en variables
@@ -85,8 +86,8 @@ if ($session) {
                 ?>
                 <tr>
                     <td><?=$partido[$i]['e1']?></td>
-                    <td><?= $partido[$i]['p1'] != null ? $partido[$i]['p1'] : 0; ?></td>
-                    <td><?= $partido[$i]['p2'] != null ? $partido[$i]['p2'] : 0; ?></td>
+                    <td class="p1"><?= $partido[$i]['p1'] != null ? $partido[$i]['p1'] : 0; ?></td>
+                    <td class="p2"><?= $partido[$i]['p2'] != null ? $partido[$i]['p2'] : 0; ?></td>
                     <td><?=$partido[$i]['e2']?></td>
                     <?php
                         if ($partido[$i]['fecha'] == null) {
@@ -96,7 +97,7 @@ if ($session) {
                         }
                     
                     if ($modifica) {?>
-                            <td><a href=ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$rondaId?>&partido=<?=$i?> class="mdi mdi-pencil">Modifica</a></td>
+                            <td class="modificaR"><a href=ver_ronda.php?liga=<?=$ligaId?>&ronda=<?=$rondaId?>&partido=<?=$i?> class="mdi mdi-pencil">Modifica</a></td>
                         <?php
                     }
                 echo "</tr>";
@@ -169,7 +170,6 @@ if ($session) {
 }
     ?>
 </table>
-<a href="ver_liga.php?liga=<?=$ligaId?>">Atrás</a>
 </main>
 </body>
 </html>

@@ -21,14 +21,13 @@ if (isSession()) {
     }
 
     ?>
-<form action="elimina_liga.php" method="get">
+<form action="elimina_liga.php" method="get" id="eliminaLiga">
     <input type="hidden" name="liga" value="<?= $ligaId ?>">
-    <label for="si">¿Está seguro?</label><input type="checkbox" name="si" id="si">
+    <input type="checkbox" name="si" id="si"><label for="si">¿Está seguro?</label>
     <input type="submit" value="Envia">
 </form>
 </main>
 </body>
-
 </html>
 
 <?php
